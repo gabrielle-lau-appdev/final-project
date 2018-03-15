@@ -30,7 +30,8 @@ class EventsController < ApplicationController
     @event.date = params.fetch("date")
     @event.description = params.fetch("description")
     @event.host_id = params.fetch("host_id")
-
+    @event.image = params[:image]
+    
     if @event.valid?
       @event.save
 

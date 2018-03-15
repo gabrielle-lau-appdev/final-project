@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-#I add this for file uploader
-gem 'carrierwave'
+
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -78,3 +77,6 @@ gem 'devise'
 
 #I added this for filter
 gem 'ransack', github: 'activerecord-hackery/ransack'
+
+#I add this for file uploader
+gem 'carrierwave'
