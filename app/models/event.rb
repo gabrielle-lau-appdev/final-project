@@ -29,5 +29,5 @@ class Event < ApplicationRecord
   has_many :tourists, :through => :signups, :source => :user
   
   #I added this to mount image uploader, note the second part should be removed "mount_uploader :image, ImageUploader"
-  mount_uploader :image 
+  mount_uploader :image
 end
