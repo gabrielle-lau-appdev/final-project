@@ -11,6 +11,9 @@
 <table class="table">
   <tr>
 
+    <th>
+      City
+    </th>
 
     <th>
       Event
@@ -32,7 +35,9 @@
   <% @signups.each do |signup| %>
   <%if current_user==signup.tourist%>
   <tr>
-
+    <td>
+      <%= signup.event.city %>
+    </td>
 
     <td>
       <%= signup.event.event_name %>
