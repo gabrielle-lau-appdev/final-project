@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -72,3 +74,9 @@ end
 
 gem 'activeadmin'
 gem 'devise'
+
+#I added this for filter
+gem 'ransack', github: 'activerecord-hackery/ransack'
+
+#I add this for file uploader
+gem 'carrierwave'

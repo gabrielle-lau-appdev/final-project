@@ -17,7 +17,7 @@
 
 <hr>
 
-<form action="/create_event" method="post">
+<form action="/create_event" method="post" enctype="multipart/form-data">
   <!-- Label and input for city -->
   <div class="form-group">
     <label for="city">
@@ -42,7 +42,7 @@
       Date
     </label>
 
-    <input data-provide="datepicker-inline" type="text" id="date" name="date" class="form-control" value="<%= @event.try(:date) %>">
+    <input type="date" id="date" name="date" class="form-control" value="<%= @event.try(:date) %>">
   </div>
 
   <!-- Label and input for description -->
@@ -57,11 +57,17 @@
   <!-- Label and input for host_id -->
   <div class="form-group">
     <label for="host_id">
-      Host
+      
     </label>
 
     <input type="hidden" id="host_id" name="host_id" class="form-control" value="<%= current_user.id %>">
   </div>
+    
+    <label for="image">
+      Image
+    </label>
+    <input type="file" id="image" name="image" class="form-control">  
+
 
   <button class="btn btn-block btn-outline-secondary">
     Create event

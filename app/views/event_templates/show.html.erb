@@ -2,13 +2,47 @@
   Event #<%= @event.id %> details
 </h1>
 
+<%if current_user==@event.host%>
 <a href="/events/<%= @event.id %>/edit">
   Edit event
 </a>
-
+<%else%>
+<%end%>
 <hr>
 
 <dl>
+  <dt>
+    Host:
+  </dt>
+  <dd>
+     <%@host_id=@event.host.id%>
+    <a href="/users/@host_id">
+    <%=@event.host.username%>
+    </a>
+  </dd>
+  <dt>
+    Number of tourist(s)
+  </dt>
+  <dd>
+    <%=@event.signups.count%>
+  </dd>
+  <dt>
+    Usernames of tourist(s):
+  </dt>
+    <% @event.signups.each do |current_signup|%>
+      
+    <tr>
+      <ol>
+        <li>
+               
+        <a href="/users/<%=current_signup.tourist_id%>">
+        <%=User.find(current_signup.tourist_id).username%>
+        </a>
+        </li>
+      </ol>
+    </tr>
+    <%end%>
+
   <dt>
     City
   </dt>
@@ -29,6 +63,13 @@
   <dd>
     <%= @event.date %>
   </dd>
+  
+  <dt>
+    Weather forecast for <%= @event.city %>
+  </dt>
+  <dd>
+    <%=@summary_of_next_several_days%>
+  </dd>
 
   <dt>
     Description
@@ -36,12 +77,9 @@
   <dd>
     <%= @event.description %>
   </dd>
-
-  <dt>
-    Host
-  </dt>
+  
   <dd>
-    <%= @event.host_id %>
+    <img src="<%= @event.image %>" class="img-responsive">
   </dd>
 
   <dt>
@@ -59,9 +97,12 @@
   </dd>
 </dl>
 
+<%if current_user==@event.host%>
 <a href="/delete_event/<%= @event.id %>">
   Delete event
 </a>
+<%else%>
+<%end%>
 
 <hr>
 

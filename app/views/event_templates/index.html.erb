@@ -1,29 +1,43 @@
-<h1>
-  All events
-</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-3">
+          <h1>
+          All events
+          </h1>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <%= search_form_for @q do |f| %>
+              <%= f.label :event_name_or_city_or_date_cont %>
+              <%= f.search_field :event_name_or_city_or_date_cont %>
+              <%= f.submit %>
+            <% end %>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <a href="/events/new">
+      Add a new event
+      </a>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <hr>
 
-<a href="/events/new">
-  Add a new event
-</a>
-
-<hr>
-
-<table class="table">
+<table class="table col-md-12">
   <tr>
+
     <th>
-      ID
+      <%= sort_link(@q, :city) %>
     </th>
 
     <th>
-      City
+      <%= sort_link(@q, :event_name) %>
     </th>
 
     <th>
-      Event name
-    </th>
-
-    <th>
-      Date
+      <%= sort_link(@q, :date) %>
     </th>
 
     <th>
@@ -31,26 +45,22 @@
     </th>
 
     <th>
-      Host
+      <%= sort_link(@q, :host) %>
     </th>
 
     <th>
-      Created at
-    </th>
-
+      <%= sort_link(@q, :created_at) %>
     <th>
-      Updated at
     </th>
-
+    <th>
+    </th>
     <th>
     </th>
   </tr>
 
-  <% @events.each do |event| %>
+<% @events.each do |event| %>
   <tr>
-    <td>
-      <%= event.id %>
-    </td>
+
 
     <td>
       <%= event.city %>
@@ -69,22 +79,84 @@
     </td>
 
     <td>
-      <%= event.host_id %>
+      <%= event.host.username %>
     </td>
 
     <td>
       <%= time_ago_in_words(event.created_at) %> ago
     </td>
 
-    <td>
-      <%= time_ago_in_words(event.updated_at) %> ago
-    </td>
 
     <td>
       <a href="/events/<%= event.id %>">
         Show details
       </a>
     </td>
+    <td>
+      
+    <%if event.host_id==current_user.id%>
+      <a href="/events/<%= event.id %>">
+      Edit event
+      </a>
+    <%else%>
+    <% end %>
+    
+    </td>
+    <td>
+      <!-- Validation failure messages -->
+      <% if @signup.present? %>
+        <% if @signup.errors.any? %>
+            <% @signup.errors.full_messages.each do |message| %>
+            <div class="alert alert-danger">
+          <%= message %>
+            < /div>
+            <% end %>
+        <% end %>
+      <% end %>    
+    
+    <%if event.host_id==current_user.id%>
+    <%else%>
+    <!--registration form-->
+     
+      <%if current_user.plans.exists?(event.id) %>
+        <% @current_signup_id  = Signup.where(:event_id => event.id, :tourist_id => current_user.id)[0].id %>
+        
+          <button class="btn btn-block btn-secondary">
+           <a href="/delete_signup/<%= @current_signup_id %>" style="text-decoration: none;">
+           Unregister
+           </a>
+          </button>
+          
+              
+          
+          
+      <%else%>
+        <form action="/create_signup" method="post">
+         <label for="event_id">
+        </label>
+        <input type="hidden" id="event_id" name="event_id" class="form-control" value="<%= event.id %>">
+        <label for="tourist_id">
+        </label>
+        <input type="hidden" id="tourist_id" name="tourist_id" class="form-control" value="<%= current_user.id %>">
+
+        <button class="btn btn-block btn-outline-secondary">
+        Register!
+        </button>
+        </form>
+      <%end%>
+      
+    <%end%>   
+  </td>
+  
+  <%end%>
   </tr>
-  <% end %>
+
+
 </table>
+      </div>
+    </div>
+</div>
+
+
+
+
