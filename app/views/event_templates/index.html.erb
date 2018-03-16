@@ -1,38 +1,31 @@
-<h1>
-  All events
-</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-3">
+          <h1>
+          All events
+          </h1>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <%= search_form_for @q do |f| %>
+              <%= f.label :event_name_or_city_or_date_cont %>
+              <%= f.search_field :event_name_or_city_or_date_cont %>
+              <%= f.submit %>
+            <% end %>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <a href="/events/new">
+      Add a new event
+      </a>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <hr>
 
-<a href="/events/new">
-  Add a new event
-</a>
-
-<hr>
-<div>
-  <h2>Search Events</h2>
-<%= search_form_for @q do |f| %>
-<dl>
-  
-<div >
-  <%= f.label :event_name_cont %>
-  <%= f.search_field :event_name_cont %>
-</div>
-<div >
-  <%= f.label :city_cont %>
-  <%= f.search_field :city_cont %>
-</div>
-<div >
-  <%= f.label :event_name_or_city_or_description_cont %>
-  <%= f.search_field :event_name_or_city_or_description_cont %>
-</div>
-<dl>
-<div >
-  <%= f.submit %>
-</div>
-<% end %>
-</div>
-
-
-<table class="table">
+<table class="table col-md-12">
   <tr>
 
     <th>
@@ -160,3 +153,10 @@
 
 
 </table>
+      </div>
+    </div>
+</div>
+
+
+
+

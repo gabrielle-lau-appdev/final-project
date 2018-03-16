@@ -2,17 +2,21 @@
   Events hosted by <%= @user.username %> 
 </h1>
 
-<hr>
-
+<%if current_user==@user%>
 <a href="/events/new">
   Add a new event
 </a>
 
-
-<table class="table">
+<%else%>
+<%end%>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+          <table class="table">
     <tr>
       <td>
-        Event hosted
+        Event name
       </td>
       <td>
         Date
@@ -20,6 +24,9 @@
       <td>
         Number of tourists
       </td>
+      <td>
+      </td>
+
     </tr>
       <%@user.events.each do|event|%>
         <tr>
@@ -80,8 +87,26 @@
     <%end%>   
   </td>
       <%end%>
+
       </tr>
 </table>
+        </div>
+        <div class="col-md-3">
+                  <div class="card mb-3" style=" margin-right:auto">
+  <h3 class="card-header"><%= @user.username %>'s Stats </h3>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Number of events hosted: <%=@user.events.count%></li>
+    <li class="list-group-item">Most recent event:  <a href="/events/<%=@user.events.last.id%>">
+          <%=@user.events.last.event_name%> 
+          </a>  </li>
+  </ul>
+</div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
   
 
     

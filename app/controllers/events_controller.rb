@@ -1,3 +1,4 @@
+require 'open-uri'
 class EventsController < ApplicationController
 
 #I add this for filter
