@@ -63,6 +63,13 @@
   <dd>
     <%= @event.date %>
   </dd>
+  
+  <dt>
+    Weather forecast for <%= @event.city %>
+  </dt>
+  <dd>
+    <%=@summary_of_next_several_days%>
+  </dd>
 
   <dt>
     Description
